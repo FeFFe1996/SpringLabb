@@ -1,7 +1,9 @@
 package com.example.springlabb;
 
+import com.example.springlabb.DTO.CreateEntityDTO;
 import com.example.springlabb.Movies.Movie;
 import com.example.springlabb.Movies.MovieRepository;
+import com.example.springlabb.Movies.MovieService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,16 +16,4 @@ public class SpringLabbApplication {
         SpringApplication.run(SpringLabbApplication.class, args);
     }
 
-    @Bean
-    ApplicationRunner applicationRunner(MovieRepository movieRepository){
-        return  args -> {
-            if (movieRepository.count() == 0) {
-                Movie movie = new Movie();
-                movie.setTitle("The Shawshank Redemption");
-                movie.setDirector("Frank Darabont");
-                movie.setYear("1994");
-                movieRepository.save(movie);
-            }
-        };
-    }
 }
