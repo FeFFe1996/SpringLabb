@@ -3,7 +3,6 @@ package com.example.springlabb.Movies;
 import com.example.springlabb.DTO.CreateEntityDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
