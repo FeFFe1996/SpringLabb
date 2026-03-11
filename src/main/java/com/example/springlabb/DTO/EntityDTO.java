@@ -2,30 +2,26 @@ package com.example.springlabb.DTO;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public record EntityDTO(
-        @NotNull
-        @NotEmpty
+        @NoEntry
         Long id,
 
-        @NotNull
-        @NotEmpty
+        @NoEntry
         String title,
 
-        @NotNull
-        @NotEmpty
+        @NoEntry
         String year,
 
-        @NotNull
-        @NotEmpty
+        @NoEntry
+        @Size(max=150)
         String description,
 
-        @NotNull
-        @NotEmpty
+        @NoEntry
         String director,
 
-        @NotNull
-        @NotEmpty
+        @NoEntry
         String length
         ) {
 }
