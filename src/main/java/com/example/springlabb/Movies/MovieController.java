@@ -22,6 +22,7 @@ public class MovieController {
     @Transactional
     @PostMapping("/movie/createform")
     public String createForm(@Valid CreateEntityDTO createEntityDTO, Model model, RedirectAttributes redirectAttributes){
+        log.info("started creation of new movie entity");
         //create code block for form handling
         return null;
     }
