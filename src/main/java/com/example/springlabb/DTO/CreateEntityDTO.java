@@ -11,10 +11,10 @@ public record CreateEntityDTO(
         @NoEntry
         String year,
 
-        @NoEntry
+        @Size(max = 150)
         String description,
 
-        @Size(max = 150)
+        @NoEntry
         String director,
 
         @NotNull

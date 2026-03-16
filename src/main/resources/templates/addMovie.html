@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header>
+    <h1>Add a movie</h1>
+</header>
+<body>
+    <ul>
+        <li>
+            <a th:href="@{/}">Start</a>
+        </li>
+        <li>
+            <a th:href="@{/movieList}">Back to movie list</a>
+        </li>
+    </ul>
+    <form method="post" th:action="@{/movieList/addMovie}">
+        <input type="text" name="title" placeholder="title"><br>
+        <input type="text" name="release_year" placeholder="xxxx release year"><br>
+        <input type="text" name="movie_description" placeholder="movie description max 250 characters"><br>
+        <input type="text" name="movie_director" placeholder="movie director"><br>
+        <input type="text" name="length" placeholder="length of movie hh:mm"><br>
+        <input type="submit" value="Submit new movie" th:attr="value=@{/movieList/addMovie}">
+    </form>
+    <p th:text="${message}"></p>
+</body>
+</html>
