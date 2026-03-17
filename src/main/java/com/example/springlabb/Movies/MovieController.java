@@ -8,9 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class MovieController {
@@ -19,6 +22,11 @@ public class MovieController {
 
     public MovieController(MovieService movieService){
         this.movieService = movieService;
+    }
+
+    @ModelAttribute("allMovies")
+    public List<Movie> getAllMovies(){
+        return this.movieService.getMovieList();
     }
 
     @GetMapping("/")
@@ -30,6 +38,7 @@ public class MovieController {
     @GetMapping("/movieList")
     public String movieList(Model model){
         log.info("movieList");
+        model.addAttribute("movie", getAllMovies());
         return "movieList";
     }
 
@@ -40,8 +49,8 @@ public class MovieController {
     }
 
     @Transactional
-    @PostMapping("/movie/createform")
-    public String createForm(@Valid CreateEntityDTO createEntityDTO, Model model, RedirectAttributes redirectAttributes){
+    @PostMapping("/movieList/addMovie")
+    public String addMovieForm(@Valid CreateEntityDTO createEntityDTO, Model model, RedirectAttributes redirectAttributes){
         log.info("started creation of new movie entity");
         //create code block for form handling
         return null;

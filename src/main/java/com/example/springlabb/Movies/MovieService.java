@@ -22,6 +22,10 @@ public class MovieService {
 
     @Transactional
     public void createNewMovie(CreateEntityDTO createEntityDTO){
-        movieMapper.createEntity(createEntityDTO, movieRepository);
+        try {
+            movieMapper.createEntity(createEntityDTO, movieRepository);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
