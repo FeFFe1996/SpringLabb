@@ -25,7 +25,7 @@ public class MovieService {
         try {
             movieMapper.createEntity(createEntityDTO, movieRepository);
         } catch (Exception e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

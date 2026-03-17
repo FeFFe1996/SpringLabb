@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,17 +44,18 @@ public class MovieController {
     }
 
     @GetMapping("/movieList/addMovie")
-    public String addMovie(Model model){
+    public String addMovieForm(Model model){
         log.info("addMovie");
+        model.addAttribute("addMovie", new Movie());
         return "addMovie";
     }
 
     @Transactional
     @PostMapping("/movieList/addMovie")
-    public String addMovieForm(@Valid CreateEntityDTO createEntityDTO, Model model, RedirectAttributes redirectAttributes){
+    public String addMovie(@Valid @ModelAttribute("addMovie") CreateEntityDTO createEntityDTO){
         log.info("started creation of new movie entity");
-        //create code block for form handling
-        return null;
+        movieService.createNewMovie(createEntityDTO);
+        return "redirect:/movieList";
     }
 
 

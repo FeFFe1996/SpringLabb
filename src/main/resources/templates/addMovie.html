@@ -16,14 +16,13 @@
             <a th:href="@{/movieList}">Back to movie list</a>
         </li>
     </ul>
-    <form method="post" th:action="@{/movieList/addMovie}" th:object="${movie}">
-        <input type="text" name="title" placeholder="title" th:field=""><br>
-        <input type="text" name="release_year" placeholder="xxxx release year"><br>
-        <input type="text" name="movie_description" placeholder="movie description max 250 characters"><br>
-        <input type="text" name="movie_director" placeholder="movie director"><br>
-        <input type="text" name="length" placeholder="length of movie hh:mm"><br>
+    <form action="#" method="post" th:action="@{/movieList/addMovie}" th:object="${addMovie}">
+        <input type="text" name="title" placeholder="title" th:field="*{title}"><br>
+        <input type="text" name="release_year" placeholder="xxxx release year" th:field="*{year}"><br>
+        <input type="text" name="movie_description" placeholder="movie description max 250 characters" th:field="*{description}"><br>
+        <input type="text" name="movie_director" placeholder="movie director" th:field="*{director}"><br>
+        <input type="text" name="length" placeholder="length of movie hh:mm" th:field="*{length}"><br>
         <input type="submit" value="Submit new movie">
     </form>
-    <p th:text="${message}"></p>
 </body>
 </html>

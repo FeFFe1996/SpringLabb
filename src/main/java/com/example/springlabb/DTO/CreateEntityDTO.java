@@ -11,7 +11,7 @@ public record CreateEntityDTO(
         @NoEntry
         String year,
 
-        @Size(max = 150)
+        @Size(max = 250)
         String description,
 
         @NoEntry
