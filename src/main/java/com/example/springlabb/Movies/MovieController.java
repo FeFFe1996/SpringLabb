@@ -52,8 +52,11 @@ public class MovieController {
 
     @Transactional
     @PostMapping("/movieList/addMovie")
-    public String addMovie(@Valid @ModelAttribute("addMovie") CreateEntityDTO createEntityDTO){
+    public String addMovie(@Valid @ModelAttribute("addMovie") CreateEntityDTO createEntityDTO, BindingResult result){
         log.info("started creation of new movie entity");
+        if (result.hasErrors()){
+            return "addMovie";
+        }
         movieService.createNewMovie(createEntityDTO);
         return "redirect:/movieList";
     }
