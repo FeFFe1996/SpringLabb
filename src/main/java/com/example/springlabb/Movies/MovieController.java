@@ -62,9 +62,23 @@ public class MovieController {
     @GetMapping("/movieList/movieInfo/{id}")
     public String getMovieInfo(@PathVariable("id") String id, Model model) {
         log.info("Controller received ID: {}", id);
-        model.addAttribute("getMovieById", movieService.getMovieByID(id));
+        try{
+            model.addAttribute("getMovieById", movieService.getMovieByID(id));
+        }catch (MovieNotFoundException e){
+            log.error(e.getMessage());
+            return "redirect:/errorpage";
+        }
+
         return "movieInfo";
     }
+
+    @GetMapping("/errorpage")
+    public String getErrorPage(){
+        log.info("return to error page");
+        return "/errorpage";
+    }
+
+
 
 
 }

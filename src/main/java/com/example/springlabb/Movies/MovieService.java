@@ -36,6 +36,9 @@ public class MovieService {
         if (id == null || id.isBlank()){
             throw new IllegalArgumentException("Id cannot be empty or null");
         }
+        if (movieRepository.findById(Long.parseLong(id)).isEmpty()){
+            throw new MovieNotFoundException("Movie with id "+id + " not found");
+        }
         return movieRepository.findById(Long.parseLong(id)).map(movie1 -> movieMapper.getEntityByID(movie1)).orElseThrow(() -> new MovieNotFoundException("movie with that id not found"));
     }
 }
