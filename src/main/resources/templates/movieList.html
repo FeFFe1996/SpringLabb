@@ -14,31 +14,12 @@
 </header>
 <body>
     <p>Här kommer en lista med filmer att visas</p>
-
     <div class="movieList" th:unless="${#lists.isEmpty(allMovies)}">
-        <table>
-            <thead>
-                <tr>
-                    <th>Movie title</th>
-                    <th>Director</th>
-                    <th>Release Year</th>
-                    <th>Description</th>
-                    <th>Length hh:mm</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="movie : ${allMovies}">
-                    <td><span th:text="${movie.title}"></span></td>
-                    <td><span th:text="${movie.director}"></span></td>
-                    <td><span th:text="${movie.year}"></span></td>
-                    <td><span th:text="${movie.description}"></span></td>
-                    <td><span th:text="${movie.length}"></span></td>
-                </tr>
-            </tbody>
-        </table>
+        <ul th:each="movie : ${allMovies}">
+            <li><a th:text="${movie.title}" th:href="@{/movieList/movieInfo/{id}(id=${movie.id})}"></a></li>
+        </ul>
     </div>
     <ul>
-
         <li>
             <a th:href="@{/movieList/addMovie}">add a movie</a>
         </li>

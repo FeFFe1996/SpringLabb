@@ -1,6 +1,7 @@
 package com.example.springlabb.Movies;
 
 import com.example.springlabb.DTO.CreateEntityDTO;
+import com.example.springlabb.DTO.EntityDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -8,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class MovieController {
     }
 
     @ModelAttribute("allMovies")
-    public List<Movie> getAllMovies(){
+    public List<EntityDTO> getAllMovies(){
         return this.movieService.getMovieList();
     }
 
@@ -59,6 +57,13 @@ public class MovieController {
         }
         movieService.createNewMovie(createEntityDTO);
         return "redirect:/movieList";
+    }
+
+    @GetMapping("/movieList/movieInfo/{id}")
+    public String getMovieInfo(@PathVariable("id") String id, Model model) {
+        log.info("Controller received ID: {}", id);
+        model.addAttribute("getMovieById", movieService.getMovieByID(id));
+        return "movieInfo";
     }
 
 

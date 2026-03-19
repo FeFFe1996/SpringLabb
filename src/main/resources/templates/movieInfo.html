@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MovieList</title>
+</head>
+<header>
+    <h1>Movie Info</h1>
+    <ul>
+        <li>
+            <a th:href="@{/}">Start</a>
+        </li>
+        <li>
+            <a th:href="@{/movieList}"> back to movie list</a>
+        </li>
+    </ul>
+</header>
+<body>
+    <div th:if="${getMovieById}" th:object="${getMovieById}">
+        <h3>Title</h3>
+        <p th:text="${getMovieById.title}"></p>
+        <h3>Release year</h3>
+        <p th:text="${getMovieById.year}"></p>
+        <h3>Director</h3>
+        <p th:text="${getMovieById.director}"></p>
+        <h3>Length</h3>
+        <p th:text="${getMovieById.length}"></p>
+        <h3>Description</h3>
+        <p th:text="${getMovieById.description}"></p>
+    </div>
+    <ul>
+        <li><a th:href="@{/movieList/movieInfo/{id}(id=${movie.id})/updateMovie}"></a></li>
+    </ul>
+</body>
+</html>
