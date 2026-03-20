@@ -16,18 +16,20 @@
         <a th:href="@{/movieList}">Back to movie list</a>
     </li>
 </ul>
-<form action="#" method="post" th:action="@{/movieList/addMovie}" th:object="${addMovie}">
-    <input type="text" name="title" placeholder="title" th:field="*{title}"><br>
-    <p th:if="${#fields.hasErrors('title')}" th:class="${#fields.hasErrors('title')}">Invalid input, cannot be null or empty and must be between 5 and 250 characters</p>
-    <input type="text" name="release_year" placeholder="xxxx release year" th:field="*{year}"><br>
-    <p th:if="${#fields.hasErrors('year')}" th:class="${#fields.hasErrors('year')}">Invalid input, cannot be null or empty</p>
-    <input type="text" name="movie_description" placeholder="movie description max 250 characters" th:field="*{description}"><br>
-    <p th:if="${#fields.hasErrors('description')}" th:class="${#fields.hasErrors('description')}">description cannot be longer than 250 characters</p>
-    <input type="text" name="movie_director" placeholder="movie director" th:field="*{director}">
-    <p th:if="${#fields.hasErrors('director')}" th:class="${#fields.hasErrors('director')}">Invalid input, cannot be null or empty</p><br>
-    <input type="text" name="length" placeholder="length of movie hh:mm" th:field="*{length}">
-    <p th:if="${#fields.hasErrors('length')}" th:class="${#fields.hasErrors('length')}">Invalid input, cannot be null or empty</p><br>
-    <input type="submit" value="Submit new movie">
-</form>
+<div th:object="${getMovieById}">
+    <form action="#" method="post" th:action="@{/movieList/movieInfo/{id}/updateMovie(id=${getMovieById.id})}" th:object="${updateMovie}">
+        <input type="text" name="title" th:value="${getMovieById.title}" th:field="*{title}"><br>
+        <p th:if="${#fields.hasErrors('title')}" th:class="${#fields.hasErrors('title')}">Invalid input, cannot be null or empty and must be between 5 and 250 characters</p>
+        <input type="text" name="release_year" th:value="${getMovieById.year}" th:field="*{year}"><br>
+        <p th:if="${#fields.hasErrors('year')}" th:class="${#fields.hasErrors('year')}">Invalid input, cannot be null or empty</p>
+        <input type="text" name="movie_description" th:value="${getMovieById.description}" th:field="*{description}"><br>
+        <p th:if="${#fields.hasErrors('description')}" th:class="${#fields.hasErrors('description')}">description cannot be longer than 250 characters</p>
+        <input type="text" name="movie_director" th:value="${getMovieById.director}" th:field="*{director}">
+        <p th:if="${#fields.hasErrors('director')}" th:class="${#fields.hasErrors('director')}">Invalid input, cannot be null or empty</p><br>
+        <input type="text" name="length" th:value="${getMovieById.length}" th:field="*{length}">
+        <p th:if="${#fields.hasErrors('length')}" th:class="${#fields.hasErrors('length')}">Invalid input, cannot be null or empty</p><br>
+        <input type="submit" value="Submit new movie">
+    </form>
+</div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.example.springlabb.Movies;
 
 import com.example.springlabb.DTO.CreateEntityDTO;
 import com.example.springlabb.DTO.EntityDTO;
+import com.example.springlabb.DTO.UpdateEntityDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -61,7 +62,7 @@ public class MovieController {
 
     @GetMapping("/movieList/movieInfo/{id}")
     public String getMovieInfo(@PathVariable("id") String id, Model model) {
-        log.info("Controller received ID: {}", id);
+        log.info("MovieInfo. Controller received ID: {}", id);
         try{
             model.addAttribute("getMovieById", movieService.getMovieByID(id));
         }catch (MovieNotFoundException e){
@@ -70,6 +71,35 @@ public class MovieController {
         }
 
         return "movieInfo";
+    }
+
+    @GetMapping("/movieList/movieInfo/{id}/updateMovie")
+    public String updateMovieForm(@PathVariable("id") String id,Model model){
+        log.info("updateMovie. Updating movie with ID: {}", id);
+        try{
+            EntityDTO entity = movieService.getMovieByID(id);
+            model.addAttribute("getMovieById", entity);
+
+            UpdateEntityDTO updateEntityDTO = new UpdateEntityDTO(entity.id(), entity.title(), entity.year(), entity.description(), entity.director(), entity.length());
+
+            model.addAttribute("updateMovie", updateEntityDTO);
+
+        }catch (MovieNotFoundException e){
+            log.error(e.getMessage());
+            return "redirect:/errorpage";
+        }
+        return "updateMovie";
+    }
+
+    @Transactional
+    @PostMapping("/movieList/movieInfo/{id}/updateMovie")
+    public String updateMovie(@Valid @ModelAttribute("updateMovie") UpdateEntityDTO updateEntityDTO, BindingResult result){
+        log.info("updating movie entity");
+        if (result.hasErrors()){
+            return "updateMovie";
+        }
+        movieService.updateMovie(updateEntityDTO);
+        return "redirect:/movieList/movieInfo/{id}";
     }
 
     @GetMapping("/errorpage")

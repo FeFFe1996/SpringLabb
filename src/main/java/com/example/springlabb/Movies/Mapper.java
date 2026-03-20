@@ -2,6 +2,7 @@ package com.example.springlabb.Movies;
 
 import com.example.springlabb.DTO.CreateEntityDTO;
 import com.example.springlabb.DTO.EntityDTO;
+import com.example.springlabb.DTO.UpdateEntityDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,5 +33,20 @@ public class Mapper {
     public EntityDTO getEntityByID(Movie movie){
         EntityDTO entity = new EntityDTO(movie.getId(), movie.getTitle(), movie.getYear(), movie.getDescription(), movie.getDirector(), movie.getLength());
         return entity;
+    }
+
+    public void updateMovieEntity(UpdateEntityDTO updateEntityDTO, MovieRepository movieRepository) {
+        if(movieRepository.existsById(updateEntityDTO.id())){
+            Movie movie = movieRepository.getMovieById(updateEntityDTO.id());
+            movie.setTitle(updateEntityDTO.title());
+            movie.setDirector(updateEntityDTO.director());
+            movie.setDescription(updateEntityDTO.description());
+            movie.setYear(updateEntityDTO.year());
+            movie.setLength(updateEntityDTO.length());
+            movieRepository.save(movie);
+        } else {
+            throw new MovieNotFoundException("no movie found, cannot update. Try adding it instead at movie list");
+        }
+
     }
 }

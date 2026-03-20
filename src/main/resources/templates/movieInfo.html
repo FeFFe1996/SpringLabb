@@ -27,9 +27,10 @@
         <p th:text="${getMovieById.length}"></p>
         <h3>Description</h3>
         <p th:text="${getMovieById.description}"></p>
+
+        <ul>
+            <li><a th:href="@{/movieList/movieInfo/{id}/updateMovie(id=${getMovieById.id})}">Update movie</a></li>
+        </ul>
     </div>
-    <ul>
-        <li><a th:href="@{/movieList/movieInfo/{id}(id=${movie.id})/updateMovie}"></a></li>
-    </ul>
 </body>
 </html>
