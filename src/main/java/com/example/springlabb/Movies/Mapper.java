@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class Mapper {
-    public void createEntity(CreateEntityDTO createEntityDTO, MovieRepository movieRepository){
+    public Movie createEntity(CreateEntityDTO createEntityDTO){
         Movie movie = new Movie();
         movie.setTitle(createEntityDTO.title());
         movie.setDescription(createEntityDTO.description());
         movie.setYear(createEntityDTO.year());
         movie.setDirector(createEntityDTO.director());
         movie.setLength(createEntityDTO.length());
-        movieRepository.save(movie);
+        return movie;
     }
 
     public List<EntityDTO> getEntities(MovieRepository movieRepository){
-        List<EntityDTO> entityList = movieRepository.findAll().stream()
+        return movieRepository.findAll().stream()
                 .map(movie -> new EntityDTO(
                 movie.getId(),
                 movie.getTitle(),
@@ -27,7 +27,6 @@ public class Mapper {
                 movie.getDescription(),
                 movie.getDirector(),
                 movie.getLength())).toList();
-        return entityList;
     }
 
     public EntityDTO getEntityByID(Movie movie){

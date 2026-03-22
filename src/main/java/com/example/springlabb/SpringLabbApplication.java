@@ -15,19 +15,5 @@ public class SpringLabbApplication {
         SpringApplication.run(SpringLabbApplication.class, args);
     }
 
-    @Bean
-    public ApplicationRunner init(MovieRepository movieRepository) {
-        return args -> {
-            if (movieRepository.count() == 0) {
-                Movie movie = new Movie();
-                movie.setTitle("The Shawshank Redemption");
-                movie.setYear("1994");
-                movie.setDescription("The Shawshank Redemption");
-                movie.setDirector("Frank Darabont");
-                movie.setLength("2:22");
-                movieRepository.save(movie);
-            }
-        };
-    }
 
 }

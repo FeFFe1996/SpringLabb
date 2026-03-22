@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public record CreateEntityDTO(
         @NoEntry
-        @Size(min=5, max=150)
+        @Size(min=3, max=150)
         String title,
 
         @NoEntry

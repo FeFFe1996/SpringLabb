@@ -78,7 +78,6 @@ public class MovieController {
         log.info("updateMovie. Updating movie with ID: {}", id);
         try{
             EntityDTO entity = movieService.getMovieByID(id);
-            model.addAttribute("getMovieById", entity);
 
             UpdateEntityDTO updateEntityDTO = new UpdateEntityDTO(entity.id(), entity.title(), entity.year(), entity.description(), entity.director(), entity.length());
 
